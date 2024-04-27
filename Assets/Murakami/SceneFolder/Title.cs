@@ -20,6 +20,6 @@ public class Title : MonoBehaviour
 
     void ChangeScene()
     {
-        SceneManager.LoadScene("EnemyTest");
+        SceneManager.LoadScene("EnemyTest2");
     }
 }

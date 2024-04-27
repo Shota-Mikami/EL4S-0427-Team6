@@ -6,17 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class Result : MonoBehaviour
 {
-    private int _minute;
-    private float _seconds;
     //　タイマー表示用テキスト
-    public Text timerText;
+    public Text _score;
 
     // Start is called before the first frame update
     void Start()
     {
-        _minute = Timer.minute;
-        _seconds = Timer.seconds;
-        timerText.text = _minute.ToString("00") + ":" + ((int)_seconds).ToString("00");
+        int score = Score._score;
+        _score.text = score.ToString();
     }
 
     // Update is called once per frame

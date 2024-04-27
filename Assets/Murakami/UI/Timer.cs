@@ -18,7 +18,7 @@ public class Timer : MonoBehaviour
     {
         _isStop = false;
         minute = 0;
-        seconds = 0f;
+        seconds = 6f;
         oldSeconds = 0f;
         timerText = GetComponentInChildren<Text>();
     }
@@ -27,18 +27,23 @@ public class Timer : MonoBehaviour
     {
         if(!_isStop)
         {
-            seconds += Time.deltaTime;
-            if (seconds >= 60f)
+            seconds -= Time.deltaTime;
+            if (minute >= 1 && seconds <= 0f)
             {
-                minute++;
-                seconds = seconds - 60;
+                minute--;
+                seconds = 59f;
             }
             //　値が変わった時だけテキストUIを更新
             if ((int)seconds != (int)oldSeconds)
             {
-                timerText.text = minute.ToString("00") + ":" + ((int)seconds).ToString("00");
+                timerText.text = minute.ToString("00") + ":" + (seconds).ToString("00");
             }
             oldSeconds = seconds;
+        }
+
+        if(seconds < 0f)
+        {
+            ChangeScene();
         }
 
 

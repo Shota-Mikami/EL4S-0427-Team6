@@ -14,6 +14,9 @@ public class Enemy : MonoBehaviour
 
     private float _runAwayDistance = 10f;
 
+    [SerializeField]
+    private GameObject _enemy;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,5 +38,35 @@ public class Enemy : MonoBehaviour
         var destination = transform.position + direction * _runAwayDistance;
 
         _agent.SetDestination(destination);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "Player")
+        {
+            Summon();
+            Score.AddScore();
+
+            Destroy(this.gameObject);
+        }
+    }
+
+    // Ž€‚ñ‚¾‚Æ‚«‚ÉŒÄ‚Ô
+    private void Summon()
+    {
+        if (EnemyFactory._totalEnemy > EnemyFactory._maxValue) return;
+
+        for (int i = 0; i < EnemyFactory._summonValue; i++)
+        {
+            float x = Random.Range(-EnemyFactory._size.x, EnemyFactory._size.x); //-4.5‚©‚ç4.5‚ÌŠÔ‚Åƒ‰ƒ“ƒ_ƒ€
+            float z = Random.Range(-EnemyFactory._size.z, EnemyFactory._size.z); //-4.5‚©‚ç4.5‚ÌŠÔ‚Åƒ‰ƒ“ƒ_ƒ€
+
+            _enemy.transform.position = new Vector3(x / 2, 1f, z / 2);
+
+            Instantiate(_enemy);
+            EnemyFactory.AddTotalEnemy();
+        }
+
+        EnemyFactory.Multiply();
     }
 }
