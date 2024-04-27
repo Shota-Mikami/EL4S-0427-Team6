@@ -42,8 +42,8 @@ public class Timer : MonoBehaviour
         }
 
 
-        if (Input.GetKey(KeyCode.Space))
-            Invoke("ChangeScene", 0.5f);
+        //if (Input.GetKey(KeyCode.Space))
+        //    Invoke("ChangeScene", 0.5f);
     }
     void ChangeScene()
     {
